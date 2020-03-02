@@ -46,8 +46,6 @@ const questions = [{
 function generateMarkdown(data, name, bioImg, email) {
   const {username, title, description, license, depCommand, repoUse, testCommand, contribute} = data;
 
-  console.log(`name: ${name} \n bioImg: ${bioImg} \n email: ${email}`);
-
   let contact;
   let badge;
   let licenseText = `This project is licensed under the ${license} license.`;
@@ -76,7 +74,7 @@ function generateMarkdown(data, name, bioImg, email) {
   }
 
   if (!email){
-    contact = `[GitHub](https://github.com/${username} "GitHub for ${username}")]`
+    contact = `[GitHub](https://github.com/${username} "GitHub for ${username}")`
   }
   else {
     contact = `${email}`
@@ -85,6 +83,7 @@ function generateMarkdown(data, name, bioImg, email) {
   # ${title}
 
   ${badge}
+
   [Link to GitHub repo](https://github.com/${username}/${title})
   
   ## Description
@@ -136,30 +135,28 @@ function generateMarkdown(data, name, bioImg, email) {
 }
 
 inquirer
-    .prompt(questions).then(function(data){
-        const {username} = data;
+  .prompt(questions).then(function(data){
+    const {username} = data;
 
-        const queryURL = `https://api.github.com/users/${username}`;
+    const queryURL = `https://api.github.com/users/${username}`;
 
-        axios.get(queryURL).then(function(response){
-            console.log(response.data);
-            const {name, bioImg, email} = response.data;
-            console.log(`name: ${name} \n bioImg: ${bioImg} \n email: ${email}`);
+    axios.get(queryURL).then(function(response){
+        console.log(response.data);
+        const {name, avatar_url, email} = response.data;
 
-            
-            //create string for insertion
-            const markdownText = generateMarkdown(data, name, bioImg, email);
-          
-            //write new file
-            fs.writeFile("./Generated/README.md", markdownText, function(err){
-              if (err) {
-                  throw err;
-              } 
-              else {
-                  console.log("ReadMe successfully created!");
-              }
-            });
+        //create string for insertion
+        const markdownText = generateMarkdown(data, name, avatar_url, email);
+      
+        //write new file
+        fs.writeFile("./Generated/README.md", markdownText, function(err){
+          if (err) {
+              throw err;
+          } 
+          else {
+              console.log("ReadMe successfully created!");
+          }
         });
+    });
 });
 
 

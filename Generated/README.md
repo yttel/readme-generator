@@ -2,6 +2,7 @@
   # stuff
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  
   [Link to GitHub repo](https://github.com/yttel/stuff)
   
   ## Description
@@ -45,7 +46,7 @@
   
   ## Questions
   
-  ![headshot image](undefined "undefined")
+  ![headshot image](https://avatars2.githubusercontent.com/u/58376985?v=4 "Letty Bedard")
   
-  If you have any questions about this repository, please contact undefined directly via [GitHub](https://github.com/yttel "GitHub for yttel")].
+  If you have any questions about this repository, please contact Letty Bedard directly via [GitHub](https://github.com/yttel "GitHub for yttel")].
   
