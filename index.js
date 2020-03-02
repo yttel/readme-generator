@@ -141,7 +141,6 @@ inquirer
     const queryURL = `https://api.github.com/users/${username}`;
 
     axios.get(queryURL).then(function(response){
-        console.log(response.data);
         const {name, avatar_url, email} = response.data;
 
         //create string for insertion
