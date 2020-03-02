@@ -46,9 +46,13 @@ const questions = [{
 function generateMarkdown(data, name, bioImg, email) {
   const {username, title, description, license, depCommand, repoUse, testCommand, contribute} = data;
 
+  console.log(`name: ${name} \n bioImg: ${bioImg} \n email: ${email}`);
+
   let contact;
   let badge;
+  let licenseText = `This project is licensed under the ${license} license.`;
 
+  //license & badge info
   switch(license) {
     case "MPL 2.0":
       badge = `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`;
@@ -64,12 +68,12 @@ function generateMarkdown(data, name, bioImg, email) {
 
     case "None":
       badge = "";
+      licenseText = "This project is not currently licensed."
       break;
   
     default:
       badge = "BROKEN";
   }
-
 
   if (!email){
     contact = `[GitHub](https://github.com/${username} "GitHub for ${username}")]`
@@ -109,7 +113,7 @@ function generateMarkdown(data, name, bioImg, email) {
   
   ## License
   
-  This project is licensed under the ${license} license.
+  ${licenseText}
   
   ## Contributing
   
@@ -138,13 +142,16 @@ inquirer
         const queryURL = `https://api.github.com/users/${username}`;
 
         axios.get(queryURL).then(function(response){
-            const {name, bioImg, email} = response;
+            console.log(response.data);
+            const {name, bioImg, email} = response.data;
+            console.log(`name: ${name} \n bioImg: ${bioImg} \n email: ${email}`);
+
             
             //create string for insertion
             const markdownText = generateMarkdown(data, name, bioImg, email);
           
             //write new file
-            fs.writeFile("readMe.md", markdownText, function(err){
+            fs.writeFile("./Generated/README.md", markdownText, function(err){
               if (err) {
                   throw err;
               } 

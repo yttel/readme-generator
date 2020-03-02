@@ -1,7 +1,7 @@
 function generateMarkdown(data, name, bioImg, email) {
   const {username, title, description, license, depCommand, repoUse, testCommand, contribute} = data;
 
-  const contact;
+  let contact;
 
   if (!email){
     contact = `[GitHub](https://github.com/${username} "GitHub for ${username}")]`
